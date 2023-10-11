@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-    validates :name, :phone, presence: { message: 'obrigatório' }
+    validates :name, presence: { message: 'obrigatório' }
+    validates :phone, phone: { message: 'Inválido!' }
     validates :email, email: { message: 'Inválido!' }
     validates :cpf, cpf: { message: 'Inválido!' }
 end

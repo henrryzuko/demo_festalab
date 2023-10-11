@@ -6,7 +6,7 @@ class CpfValidator < ActiveModel::EachValidator
     record.errors.add(
       attribute,
       :invalid_cpf,
-      message: options[:message] || 'is not valid',
+      message: options[:message] || 'is not a valid cpf',
       value: value
     )
  

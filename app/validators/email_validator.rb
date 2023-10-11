@@ -6,7 +6,7 @@ class EmailValidator < ActiveModel::EachValidator
         record.errors.add(
             attribute,
             :invalid_email,
-            message: options[:message] || 'is not an email',
+            message: options[:message] || 'is not a valid email',
             value: value
         )
 
