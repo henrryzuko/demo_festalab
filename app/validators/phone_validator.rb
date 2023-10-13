@@ -15,10 +15,16 @@ class PhoneValidator < ActiveModel::EachValidator
         return false if phone.nil?
         return false if phone.blank?
 
-        unless phone =~ /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
-            return false
+        valor = phone.scan /[0-9]/
+
+        if valor.length <= 13 && valor.length >= 11
+            unless phone =~ /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+                return false
+            end
+
+            return true
         end
 
-        return true
+        return false
     end
 end
