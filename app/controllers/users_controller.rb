@@ -3,8 +3,8 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    if params[:search]
-      @users = User.search(params[:search])
+    if param_exist(params[:name]) || param_exist(params[:email]) || param_exist(params[:phone]) || param_exist(params[:cpf])
+      @users = User.search(params)
     else
       @users = User.all
     end
@@ -26,6 +26,10 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    
+    @user.update_attribute(:phone, "#{user_params[:phone].gsub(/[^0-9]/i, '')}")
+    
+    @user.update_attribute(:cpf, "#{user_params[:cpf].gsub(/[^0-9]/i, '')}")
 
     respond_to do |format|
       if @user.save
@@ -70,5 +74,13 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :email, :phone, :cpf)
+    end
+
+    # Verify if params are valid.
+    def param_exist(param)
+      return false if param.nil?
+      return false if param.blank?
+
+      return true
     end
 end

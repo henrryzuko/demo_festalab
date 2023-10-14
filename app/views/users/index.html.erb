@@ -1,10 +1,23 @@
+<%= stylesheet_link_tag "usersearch" %>
+
 <p style="color: green"><%= notice %></p>
 
-<h1>Buscar Usuários</h1>
+<h1>Search Users</h1>
 
-<%= form_tag(users_path, method: :get) do %>
-  <%= text_field_tag 'search', nil, placeholder: 'Digite o termo de busca...' %>
-  <%= submit_tag 'Buscar' %>
+<%= form_with model: @user, method: :get do |form| %>
+  <%= form.label :name, "Name:" %>
+  <%= form.text_field :name %>
+  <div class="divider" />
+  <%= form.label :email, "Email:" %>
+  <%= form.text_field :email %>
+  <div class="divider" />
+  <%= form.label :phone, "Phone:" %>
+  <%= form.text_field :phone %>
+  <div class="divider" />
+  <%= form.label :cpf, "Cpf:" %>
+  <%= form.text_field :cpf %>
+  <div class="divider" />
+  <%= form.submit "Search" %>
 <% end %>
 
 <h1>Users</h1>
